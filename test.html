@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/jquery-1.11.0.js"></script>
+    <script src="js/jquery.easing.min.js"></script>
+    <style>
+        .circle{
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: pink;
+            position: relative;
+            top: 300px;
+            left: 600px;
+        }
+    </style>
+</head>
+
+<body>
+<div class="circle"></div>
+</body>
+</html>
+<script>
+    $('.circle').animate({
+        top: 500,
+        opacity: 1
+    }, 1000, 'easeOutBounce');
+
+//    linear
+//    swing
+//    easeInQuad
+//    easeOutQuad
+//    easeInOutQuad
+//    easeInCubic
+//    easeOutCubic
+//    easeInOutCubic
+//    easeInQuart
+//    easeOutQuart
+//    easeInOutQuart
+//    easeInQuint
+//    easeOutQuint
+//    easeInOutQuint
+//    easeInExpo
+//    easeOutExpo
+//    easeInOutExpo
+//    easeInSine
+//    easeOutSine
+//    easeInOutSine
+//    easeInCirc
+//    easeOutCirc
+//    easeInOutCirc
+//    easeInElastic
+//    easeOutElastic
+//    easeInOutElastic
+//    easeInBack
+//    easeOutBack
+//    easeInOutBack
+//    easeInBounce
+//    easeOutBounce
+//    easeInOutBounce
+</script>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <meta http-equiv="Access-Control-Allow-Origin" content="*">
+    <meta name="keywords" content="关键字" />
+    <meta name="description" content="分享描述" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>手机摇晃</title>
+</head>
+<body>
+
+</body>
+</html>
+<script src="../globaljs/jquery-1.11.0.js"></script>
+<script>
+    /**
+     * 摇晃手机
+     */
+    shakeMobile();
+    function shakeMobile() {
+        var shake = {
+            shakeThreshold:5000,
+            lastUpdate:0,
+            x:'',
+            y:'',
+            z:'',
+            lastX:'',
+            lastY:'',
+            lastZ:'',
+            deviceMotionHandler:function (eventData) {
+                var acceleration = eventData.accelerationIncludingGravity; // 获取含重力的加速度
+                var curTime = new Date().getTime();
+
+                // 100毫秒进行一次位置判断
+                if ((curTime - shake.lastUpdate) > 100) {
+
+                    var diffTime = curTime - shake.lastUpdate;
+                    shake.lastUpdate = curTime;
+
+                    shake.x = acceleration.x;
+                    shake.y = acceleration.y;
+                    shake.z = acceleration.z;
+
+                    var speed = Math.abs(shake.x + shake.y + shake.z - shake.lastX - shake.lastY - shake.lastZ) / diffTime * 10000;
+                    // 前后x, y, z间的差值的绝对值和时间比率超过了预设的阈值，则判断设备进行了摇晃操作
+                    if (speed > shake.shakeThreshold) {
+                        doSometing(shake,speed);
+                    }
+
+                    shake.lastX = shake.x;
+                    shake.lastY = shake.y;
+                    shake.lastZ = shake.z;
+                }
+            }
+        }
+
+        // 监听传感器运动事件
+        if (window.DeviceMotionEvent) {
+            window.addEventListener('devicemotion', shake.deviceMotionHandler, false);
+        } else {
+            alert('本设备不支持手机晃动');
+        }
+    }
+
+    /**
+     * 摇晃手机事件
+     * @param shake
+     * @param speed
+     */
+    function doSometing(shake,speed){
+        alert(shake.shakeThreshold+'---'+speed+'晃了');
+    }
+</script>
